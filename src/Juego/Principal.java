@@ -10,7 +10,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -34,7 +38,7 @@ public class Principal  extends Application {
     static Button btEl10 = new Button();
     
     static Elementos elemento1 = new Elementos ("Cobre (2)", 2, 63.54f, btEl1);
-    static Elementos elemento2 = new Elementos ("Zinc",  2, 65.39f, btEl2);
+    static Elementos elemento2 = new Elementos ("Aluminio",  3, 26.98f, btEl2);
     static Elementos elemento3 = new Elementos ("Hierro (3)",  3, 55.84f, btEl3);
     static Elementos elemento4 = new Elementos ("Oro (1)", 1, 196.96f, btEl4);
     static Elementos elemento5 = new Elementos ("Fósforo (5)", 5, 30.97f, btEl5);
@@ -67,19 +71,29 @@ public class Principal  extends Application {
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
         pane.setVgap(15);
-        pane.setHgap(15);
-        pane.setPadding(new Insets (30,30,30,30));
+        pane.setHgap(20);
+        pane.setPadding(new Insets (20,20,20,30));
         
         Text tituloEnemigo = new Text("Elemento Contrincante: ");
+        tituloEnemigo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        GridPane.setColumnSpan(tituloEnemigo, 2);
         Text miTitulo = new Text ("Elegir Elemento: ");
-        Text instruccionesTitulo = new Text ("INSTRUCCIONES:");
-        Text instrucciones0 = new Text ("Seleccionar Elemento --->> OK");
+        miTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        GridPane.setColumnSpan(miTitulo, 2);
+        
+        Text instruccionesTitulo = new Text ("Instrucciones:");
+        instruccionesTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        Text instrucciones0 = new Text ("Se generarán Elementos aleatorios para ambos equipos.");
+        instrucciones0.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         GridPane.setColumnSpan(instrucciones0, 5);
-        Text instrucciones1 = new Text ("Se generarán Elementos aleatorios para ambos equipos.");
+        Text instrucciones1 = new Text ("El daño de cada elemento sera su Número de valencia multiplicada por su Masa Atómica.");
+        instrucciones1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         GridPane.setColumnSpan(instrucciones1, 5);
-        Text instrucciones2 = new Text ("El daño de cada elemento sera su Número de valencia multiplicada por su Masa Atómica.");
+        Text instrucciones2 = new Text ("El numero de valencia, de los Elementos con mas de una, estará subrayada.");
+        instrucciones2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         GridPane.setColumnSpan(instrucciones2, 5);
-        Text instrucciones3 = new Text ("El numero de valencia, de los Elementos con mas de una, estará indicada entre paréntesis.");
+        Text instrucciones3 = new Text (" Seleccionar Elemento --->> OK");
+        instrucciones3.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
         GridPane.setColumnSpan(instrucciones3, 5);
         
         GridPane.setConstraints(tituloEnemigo, 0, 0);
@@ -89,8 +103,6 @@ public class Principal  extends Application {
         GridPane.setConstraints(instrucciones1, 0, 9);
         GridPane.setConstraints(instrucciones2, 0, 10);
         GridPane.setConstraints(instrucciones3, 0, 11);
-        
-        
         
         //BOTONES ENEMIGOS:
         elementosEnemigos.add(elementoR1);
@@ -103,6 +115,7 @@ public class Principal  extends Application {
         //BOTON OK:
         Button bOk = new Button();
         bOk.setText(" OK ");
+        bOk.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
         GridPane.setConstraints(bOk, 4, 6);
         
         // MIS BOTONES:
@@ -170,8 +183,8 @@ public class Principal  extends Application {
         });
         
         pane.getChildren().addAll(tituloEnemigo,elementosEnemigos.get(0).getBoton(),misElementos.get(0).getBoton(),misElementos.get(1).getBoton(),misElementos.get(2).getBoton(),misElementos.get(3).getBoton(),miTitulo,bOk,instruccionesTitulo,instrucciones0,instrucciones1,instrucciones2,instrucciones3);
-        
-        Scene scene = new Scene(pane, 600, 400);
+        pane.setStyle("-fx-background-image: url('pastel2.jpg')");
+        Scene scene = new Scene(pane, 800, 680);
         
         primaryStage.setTitle("Ap. Quimica (Valencias & Masa Atómica)");
         primaryStage.setScene(scene);
@@ -182,21 +195,24 @@ public class Principal  extends Application {
     public Scene lanzarEscenaGeneral(Stage primaryStage){
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
-        pane.setVgap(15);
-        pane.setHgap(15);
+        pane.setVgap(20);
+        pane.setHgap(20);
         pane.setPadding(new Insets (30,30,30,30));
         
-        Text tituloEnemigo = new Text();
-        tituloEnemigo.setText("Elemento Contrincante: ");
-        Text miTitulo = new Text ();
-        miTitulo.setText("Tus Elementos Disponibles: ");
+        Text tituloEnemigo = new Text("Elemento Contrincante: ");
+        GridPane.setColumnSpan(tituloEnemigo, 3);
+        tituloEnemigo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        
+        Text miTitulo = new Text ("Tus Elementos Disponibles:");
+        GridPane.setColumnSpan(miTitulo, 3);
+        miTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         GridPane.setConstraints(tituloEnemigo, 0, 0);
         GridPane.setConstraints(miTitulo, 0, 3);
         
         switch (misElementos.size()){
             case 0:
                 
-                Scene scene = new Scene(lanzarEscenaFinal(primaryStage), 300, 300);
+                Scene scene = new Scene(lanzarEscenaFinal(primaryStage), 370, 320);
                 return scene;
                 
             case 1:
@@ -269,8 +285,9 @@ public class Principal  extends Application {
                 break;
                             
         }
+        pane.setStyle("-fx-background-image: url('pastel22.jpg')");
+        Scene scene = new Scene(pane, 600, 500);
         
-        Scene scene = new Scene(pane, 500, 300);
         return scene;
     }
     
@@ -297,11 +314,18 @@ public class Principal  extends Application {
         
                 
         Text titulo = new Text ("ELEMENTOS ELEGIDOS:");
+        titulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 25));
         Text vs = new Text ("   VS   ");
+        vs.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
         Text elContrincante = new Text ("Elemento Contrincante");
+        GridPane.setColumnSpan(elContrincante, 2);
+       
+        elContrincante.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         Text tuElemento = new Text ("Tu Elemento Elegido");
+        tuElemento.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         Button bOk = new Button();
         bOk.setText(" CONTINUAR ");
+        bOk.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         bOk.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -310,10 +334,12 @@ public class Principal  extends Application {
             }
         });
         Text daño1 = new Text("Daño: "+elementosEnemigos.get(0).getDaño());
+        daño1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         Text daño2 = new Text ("Daño: "+misElementos.get(m).getDaño());
+        daño2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         
         GridPane.setConstraints(titulo, 1, 0);
-        GridPane.setConstraints(vs, 2, 1);
+        GridPane.setConstraints(vs, 2, 2);
         GridPane.setConstraints(elContrincante, 1, 1);
         GridPane.setConstraints(tuElemento, 3, 1);
         
@@ -328,7 +354,8 @@ public class Principal  extends Application {
         
         pane.getChildren().addAll(titulo,elementosEnemigos.get(0).getBoton(),daño1,daño2,elContrincante,tuElemento,vs,botonRespaldo,bOk);
         
-        Scene scene = new Scene(pane, 500,300);
+        pane.setStyle("-fx-background-image: url('pastel1.jpg')");
+        Scene scene = new Scene(pane, 600,400);
         elementosEnemigos.remove(0);
         misElementos.remove(m);
         return scene;
@@ -343,34 +370,41 @@ public class Principal  extends Application {
         pane.setPadding(new Insets (30,30,30,30));
         
         Text titulo = new Text ("FIN DEL JUEGO:");
+        titulo.setFont(Font.font("Tahoma", FontWeight.NORMAL, 30));
+        GridPane.setColumnSpan(titulo, 2);
         GridPane.setConstraints(titulo, 1, 0);
         String resultado = "nulo";
         
         if(miPuntaje>puntajeEnemigo){
-            resultado = "GANASTE !";
+            resultado = "¡ GANASTE !";
         }
         if (miPuntaje==puntajeEnemigo){
-            resultado = "EMPATE !";
+            resultado = "¡ EMPATE !";
         }
         if(miPuntaje<puntajeEnemigo){
-            resultado = "PERDISTE !";
+            resultado = "¡ PERDISTE !";
         }
         
         Text indicadorResultado = new Text(resultado);
-        GridPane.setConstraints(indicadorResultado, 2, 1);
+        indicadorResultado.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 40));
+        GridPane.setConstraints(indicadorResultado, 1, 1);
         
         Text valorResultado1 = new Text("Tu Puntaje Final: ");
+        valorResultado1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         GridPane.setConstraints(valorResultado1, 1, 3);
         Text valorResultado_1 = new Text (""+miPuntaje);
+        valorResultado_1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         GridPane.setConstraints(valorResultado_1, 2, 3);
         
         Text valorResultado2 = new Text ("Puntaje Contrincante Final: ");
+        valorResultado2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         GridPane.setConstraints(valorResultado2, 1, 4);
         Text valorResultado_2 = new Text (""+puntajeEnemigo);
+        valorResultado_2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         GridPane.setConstraints(valorResultado_2, 2, 4);
 
         pane.getChildren().addAll(titulo,indicadorResultado,valorResultado1,valorResultado_1,valorResultado2,valorResultado_2);
-        
+        pane.setStyle("-fx-background-image: url('final.jpg')");
         return pane;
     }
     // -------------------------------------------------------------------------
@@ -384,16 +418,28 @@ public class Principal  extends Application {
     }
     
     public static void main(String[] args) {              //MAIN:
-    btEl1.setText(elemento1.getNombreDelElemento());
-    btEl2.setText(elemento2.getNombreDelElemento());
-    btEl3.setText(elemento3.getNombreDelElemento());
-    btEl4.setText(elemento4.getNombreDelElemento());
-    btEl5.setText(elemento5.getNombreDelElemento());
-    btEl6.setText(elemento6.getNombreDelElemento());
-    btEl7.setText(elemento7.getNombreDelElemento());
-    btEl8.setText(elemento8.getNombreDelElemento());
-    btEl9.setText(elemento9.getNombreDelElemento());
-    btEl10.setText(elemento10.getNombreDelElemento());
+   
+    btEl1.setStyle("-fx-background-image: url('cobre.jpg')");
+    btEl1.setPrefSize(100,150);
+    btEl2.setStyle("-fx-background-image: url('aluminio.jpg')");
+    btEl2.setPrefSize(100,150);
+    btEl3.setStyle("-fx-background-image: url('hierro.jpg')");
+    btEl3.setPrefSize(100,150);
+    btEl4.setStyle("-fx-background-image: url('oro.jpg')");
+    btEl4.setPrefSize(100,150);
+    btEl5.setStyle("-fx-background-image: url('fosforo.jpg')");
+    btEl5.setPrefSize(100,150);
+    btEl6.setStyle("-fx-background-image: url('sodio.jpg')");
+    btEl6.setPrefSize(100,150);
+    btEl7.setStyle("-fx-background-image: url('silicio.jpg')");
+    btEl7.setPrefSize(100,150);
+    btEl8.setStyle("-fx-background-image: url('boro.jpg')");
+    btEl8.setPrefSize(100,150);
+    btEl9.setStyle("-fx-background-image: url('oxigeno.jpg')");
+    btEl9.setPrefSize(100,150);
+    btEl10.setStyle("-fx-background-image: url('carbono.jpg')");
+    btEl10.setPrefSize(100,150);
+    
     conjuntoElementos.add(elemento1);
     conjuntoElementos.add(elemento2);
     conjuntoElementos.add(elemento3);
