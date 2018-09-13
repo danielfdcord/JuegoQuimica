@@ -74,10 +74,10 @@ public class Principal  extends Application {
         pane.setHgap(20);
         pane.setPadding(new Insets (20,20,20,30));
         
-        Text tituloEnemigo = new Text("Elemento Contrincante: ");
+        Text tituloEnemigo = new Text("Elementos Contrincantes: ");
         tituloEnemigo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
         GridPane.setColumnSpan(tituloEnemigo, 2);
-        Text miTitulo = new Text ("Elegir Elemento: ");
+        Text miTitulo = new Text ("Tus Elementos: ");
         miTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
         GridPane.setColumnSpan(miTitulo, 2);
         
@@ -111,6 +111,9 @@ public class Principal  extends Application {
         elementosEnemigos.add(elementoR4);
         
         GridPane.setConstraints(elementosEnemigos.get(0).getBoton(), 1, 1);
+        GridPane.setConstraints(elementosEnemigos.get(1).getBoton(), 2, 1);
+        GridPane.setConstraints(elementosEnemigos.get(2).getBoton(), 3, 1);
+        GridPane.setConstraints(elementosEnemigos.get(3).getBoton(), 4, 1);
         
         //BOTON OK:
         Button bOk = new Button();
@@ -182,7 +185,7 @@ public class Principal  extends Application {
             }
         });
         
-        pane.getChildren().addAll(tituloEnemigo,elementosEnemigos.get(0).getBoton(),misElementos.get(0).getBoton(),misElementos.get(1).getBoton(),misElementos.get(2).getBoton(),misElementos.get(3).getBoton(),miTitulo,bOk,instruccionesTitulo,instrucciones0,instrucciones1,instrucciones2,instrucciones3);
+        pane.getChildren().addAll(tituloEnemigo,elementosEnemigos.get(0).getBoton(),elementosEnemigos.get(1).getBoton(),elementosEnemigos.get(2).getBoton(),elementosEnemigos.get(3).getBoton(),misElementos.get(0).getBoton(),misElementos.get(1).getBoton(),misElementos.get(2).getBoton(),misElementos.get(3).getBoton(),miTitulo,bOk,instruccionesTitulo,instrucciones0,instrucciones1,instrucciones2,instrucciones3);
         pane.setStyle("-fx-background-image: url('pastel2.jpg')");
         Scene scene = new Scene(pane, 800, 680);
         
