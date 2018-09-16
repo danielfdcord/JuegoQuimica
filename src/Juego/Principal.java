@@ -10,9 +10,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -67,42 +66,96 @@ public class Principal  extends Application {
     //INICIO -------------------------------------------------------------------
     @Override
     public void start(Stage primaryStage) {
-        
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
-        pane.setVgap(15);
+        pane.setVgap(18);
         pane.setHgap(20);
-        pane.setPadding(new Insets (20,20,20,30));
+        pane.setPadding(new Insets (20,20,20,20));
+        
+        Text titulo = new Text("Presentacion Trabajo Quimica: ");
+        titulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        titulo.setFill(Color.BEIGE);
+        GridPane.setColumnSpan(titulo, 3);
+        
+        Text nombre = new Text("Fabiana Fernandez de Cordova R. ");
+        nombre.setFont(Font.font("Tahoma", FontWeight.SEMI_BOLD, 15));  
+        nombre.setFill(Color.BEIGE);
+        GridPane.setColumnSpan(nombre, 3);
+        
+        Text instruccionesTitulo = new Text ("Instrucciones:");
+        instruccionesTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
+        instruccionesTitulo.setFill(Color.BEIGE);
+        Text instrucciones0 = new Text ("Se generarán Elementos aleatorios para ambos equipos.");
+        instrucciones0.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+        instrucciones0.setFill(Color.BEIGE);
+        GridPane.setColumnSpan(instrucciones0, 5);
+        Text instrucciones1 = new Text ("El daño de cada elemento sera su Número de valencia multiplicada por su Masa Atómica.");
+        instrucciones1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+        instrucciones1.setFill(Color.BEIGE);
+        GridPane.setColumnSpan(instrucciones1, 5);
+        Text instrucciones2 = new Text ("El numero de valencia, de los Elementos con mas de una, estará subrayada.");
+        instrucciones2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+        GridPane.setColumnSpan(instrucciones2, 5);
+        instrucciones2.setFill(Color.BEIGE);
+        Text escuela = new Text ("Colegio Adventista");
+        escuela.setFont(Font.font("Tahoma", FontWeight.BOLD, 13));
+        GridPane.setColumnSpan(escuela, 5);
+        escuela.setFill(Color.BEIGE);
+        
+        
+        GridPane.setConstraints(titulo, 0, 0);
+        GridPane.setConstraints(escuela, 0, 9);
+        GridPane.setConstraints(nombre, 0, 10); 
+        GridPane.setConstraints(instruccionesTitulo, 0, 3);
+        GridPane.setConstraints(instrucciones0, 0, 4);
+        GridPane.setConstraints(instrucciones1, 0, 5);
+        GridPane.setConstraints(instrucciones2, 0, 6);
+        
+        
+        Button continuar = new Button ();
+        continuar.setText("Continuar");
+        pane.getChildren().addAll(titulo,nombre,continuar,escuela,instruccionesTitulo,instrucciones0,instrucciones1,instrucciones2);
+        continuar.setOnAction(new EventHandler<ActionEvent>() {
+                
+            @Override
+            public void handle(ActionEvent event) {
+                    primaryStage.setScene(lanzarEscenaPrimera(primaryStage));           
+            }
+        });
+        GridPane.setConstraints(continuar, 0, 8);  
+        
+        pane.setStyle("-fx-background-image: url('curie.jpg')");
+        
+        Scene scene = new Scene (pane,550,350);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("Ap. Quimica (Valencias & Masa Atómica)");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    // -------------------------------------------------------------------------
+    
+    public Scene lanzarEscenaPrimera(Stage primaryStage){
+        GridPane pane = new GridPane();
+        pane.setGridLinesVisible(false);
+        pane.setVgap(10);
+        pane.setHgap(20);
+        pane.setPadding(new Insets (15,20,10,20));
         
         Text tituloEnemigo = new Text("Elementos Contrincantes: ");
         tituloEnemigo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
-        GridPane.setColumnSpan(tituloEnemigo, 2);
+        GridPane.setColumnSpan(tituloEnemigo, 5);
         Text miTitulo = new Text ("Tus Elementos: ");
         miTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
-        GridPane.setColumnSpan(miTitulo, 2);
+        GridPane.setColumnSpan(miTitulo, 5);
         
-        Text instruccionesTitulo = new Text ("Instrucciones:");
-        instruccionesTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
-        Text instrucciones0 = new Text ("Se generarán Elementos aleatorios para ambos equipos.");
-        instrucciones0.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setColumnSpan(instrucciones0, 5);
-        Text instrucciones1 = new Text ("El daño de cada elemento sera su Número de valencia multiplicada por su Masa Atómica.");
-        instrucciones1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setColumnSpan(instrucciones1, 5);
-        Text instrucciones2 = new Text ("El numero de valencia, de los Elementos con mas de una, estará subrayada.");
-        instrucciones2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        GridPane.setColumnSpan(instrucciones2, 5);
-        Text instrucciones3 = new Text (" Seleccionar Elemento --->> OK");
-        instrucciones3.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
-        GridPane.setColumnSpan(instrucciones3, 5);
+        
+        Text instrucciones = new Text (" Seleccionar tu Elemento --->> OK");
+        instrucciones.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
+        GridPane.setColumnSpan(instrucciones, 5);
         
         GridPane.setConstraints(tituloEnemigo, 0, 0);
         GridPane.setConstraints(miTitulo, 0, 3);
-        GridPane.setConstraints(instruccionesTitulo, 0, 7);
-        GridPane.setConstraints(instrucciones0, 0, 8);
-        GridPane.setConstraints(instrucciones1, 0, 9);
-        GridPane.setConstraints(instrucciones2, 0, 10);
-        GridPane.setConstraints(instrucciones3, 0, 11);
+        GridPane.setConstraints(instrucciones, 0, 7);
         
         //BOTONES ENEMIGOS:
         elementosEnemigos.add(elementoR1);
@@ -185,29 +238,27 @@ public class Principal  extends Application {
             }
         });
         
-        pane.getChildren().addAll(tituloEnemigo,elementosEnemigos.get(0).getBoton(),elementosEnemigos.get(1).getBoton(),elementosEnemigos.get(2).getBoton(),elementosEnemigos.get(3).getBoton(),misElementos.get(0).getBoton(),misElementos.get(1).getBoton(),misElementos.get(2).getBoton(),misElementos.get(3).getBoton(),miTitulo,bOk,instruccionesTitulo,instrucciones0,instrucciones1,instrucciones2,instrucciones3);
+        pane.getChildren().addAll(tituloEnemigo,elementosEnemigos.get(0).getBoton(),elementosEnemigos.get(1).getBoton(),elementosEnemigos.get(2).getBoton(),elementosEnemigos.get(3).getBoton(),misElementos.get(0).getBoton(),misElementos.get(1).getBoton(),misElementos.get(2).getBoton(),misElementos.get(3).getBoton(),miTitulo,bOk,instrucciones);
         pane.setStyle("-fx-background-image: url('pastel2.jpg')");
-        Scene scene = new Scene(pane, 800, 680);
-        
-        primaryStage.setTitle("Ap. Quimica (Valencias & Masa Atómica)");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    // -------------------------------------------------------------------------
+        Scene scene = new Scene(pane, 600, 500);    
+        return scene;
+        }
+    
+    // ------------------------------------------------------------------------
     
     public Scene lanzarEscenaGeneral(Stage primaryStage){
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
         pane.setVgap(20);
         pane.setHgap(20);
-        pane.setPadding(new Insets (30,30,30,30));
+        pane.setPadding(new Insets (20,30,30,30));
         
         Text tituloEnemigo = new Text("Elemento Contrincante: ");
-        GridPane.setColumnSpan(tituloEnemigo, 3);
+        GridPane.setColumnSpan(tituloEnemigo, 5);
         tituloEnemigo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         
         Text miTitulo = new Text ("Tus Elementos Disponibles:");
-        GridPane.setColumnSpan(miTitulo, 3);
+        GridPane.setColumnSpan(miTitulo, 5);
         miTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         GridPane.setConstraints(tituloEnemigo, 0, 0);
         GridPane.setConstraints(miTitulo, 0, 3);
