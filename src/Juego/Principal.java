@@ -23,7 +23,8 @@ import javafx.stage.Stage;
  */
 
 public class Principal  extends Application {   
-    static List <Elementos> conjuntoElementos = new ArrayList<>();
+    
+    
     
     static Button btEl1 = new Button();
     static Button btEl2 = new Button();
@@ -46,26 +47,19 @@ public class Principal  extends Application {
     static Elementos elemento8 = new Elementos ("Boro",  3, 10.81f, btEl8);
     static Elementos elemento9 = new Elementos ("Oxígeno",  2, 16.0f, btEl9);
     static Elementos elemento10 = new Elementos ("Carbono",  4, 12.0f, btEl10);
-    
-    final Elementos elementoR1 = elementoRandom(conjuntoElementos);
-    final Elementos elementoR2 = elementoRandom(conjuntoElementos);
-    final Elementos elementoR3 = elementoRandom(conjuntoElementos);
-    final Elementos elementoR4 = elementoRandom(conjuntoElementos);
-    
-    final Elementos elementoR5 = elementoRandom(conjuntoElementos);
-    final Elementos elementoR6 = elementoRandom(conjuntoElementos);
-    final Elementos elementoR7 = elementoRandom(conjuntoElementos);
-    final Elementos elementoR8 = elementoRandom(conjuntoElementos);
-    
+       
     int index = 0;
     int miPuntaje=0;
     int puntajeEnemigo=0;
+    
     List <Elementos> elementosEnemigos = new ArrayList<>();
     List <Elementos> misElementos = new ArrayList<>();
    
     //INICIO -------------------------------------------------------------------
+    
     @Override
     public void start(Stage primaryStage) {
+        
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
         pane.setVgap(18);
@@ -85,23 +79,26 @@ public class Principal  extends Application {
         Text instruccionesTitulo = new Text ("Instrucciones:");
         instruccionesTitulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         instruccionesTitulo.setFill(Color.BEIGE);
+        
         Text instrucciones0 = new Text ("Se generarán Elementos aleatorios para ambos equipos.");
         instrucciones0.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
         instrucciones0.setFill(Color.BEIGE);
         GridPane.setColumnSpan(instrucciones0, 5);
+        
         Text instrucciones1 = new Text ("El daño de cada elemento sera su Número de valencia multiplicada por su Masa Atómica.");
         instrucciones1.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
         instrucciones1.setFill(Color.BEIGE);
         GridPane.setColumnSpan(instrucciones1, 5);
+        
         Text instrucciones2 = new Text ("El numero de valencia, de los Elementos con mas de una, estará subrayada.");
         instrucciones2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
         GridPane.setColumnSpan(instrucciones2, 5);
         instrucciones2.setFill(Color.BEIGE);
+        
         Text escuela = new Text ("Colegio Adventista");
         escuela.setFont(Font.font("Tahoma", FontWeight.BOLD, 13));
         GridPane.setColumnSpan(escuela, 5);
         escuela.setFill(Color.BEIGE);
-        
         
         GridPane.setConstraints(titulo, 0, 0);
         GridPane.setConstraints(escuela, 0, 9);
@@ -110,7 +107,6 @@ public class Principal  extends Application {
         GridPane.setConstraints(instrucciones0, 0, 4);
         GridPane.setConstraints(instrucciones1, 0, 5);
         GridPane.setConstraints(instrucciones2, 0, 6);
-        
         
         Button continuar = new Button ();
         continuar.setText("Continuar");
@@ -132,9 +128,51 @@ public class Principal  extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
     // -------------------------------------------------------------------------
     
+    
     public Scene lanzarEscenaPrimera(Stage primaryStage){
+    
+    List <Elementos> conjuntoElementos = new ArrayList<>();    
+    
+    conjuntoElementos.add(elemento1);
+    conjuntoElementos.add(elemento2);
+    conjuntoElementos.add(elemento3);
+    conjuntoElementos.add(elemento4);
+    conjuntoElementos.add(elemento5);
+    conjuntoElementos.add(elemento6);
+    conjuntoElementos.add(elemento7);
+    conjuntoElementos.add(elemento8);
+    conjuntoElementos.add(elemento9);
+    conjuntoElementos.add(elemento10);
+    
+    /*Se ponen estas variables acá para que en los juegos posteriores 
+      al primero, osea cada vez que se ejecute lanzarEscenaPrimera,
+      salgan elementos random distintos: */
+    Elementos elementoR1 = elementoRandom(conjuntoElementos);
+    Elementos elementoR2 = elementoRandom(conjuntoElementos);
+    Elementos elementoR3 = elementoRandom(conjuntoElementos);
+    Elementos elementoR4 = elementoRandom(conjuntoElementos);
+    
+    Elementos elementoR5 = elementoRandom(conjuntoElementos);
+    Elementos elementoR6 = elementoRandom(conjuntoElementos);
+    Elementos elementoR7 = elementoRandom(conjuntoElementos);
+    Elementos elementoR8 = elementoRandom(conjuntoElementos);
+    
+    //Para los juegos posteriores al primero:
+    //Se vuelven a habilitar los botones, que se desabilitaron en "escenaReto":
+    
+    elementoR1.getBoton().setDisable(false);
+    elementoR2.getBoton().setDisable(false);
+    elementoR3.getBoton().setDisable(false);
+    elementoR4.getBoton().setDisable(false);
+    elementoR5.getBoton().setDisable(false);
+    elementoR6.getBoton().setDisable(false);
+    elementoR7.getBoton().setDisable(false);
+    elementoR8.getBoton().setDisable(false);
+    //--------------------------------------
+            
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
         pane.setVgap(10);
@@ -244,7 +282,9 @@ public class Principal  extends Application {
         return scene;
         }
     
+    
     // ------------------------------------------------------------------------
+    
     
     public Scene lanzarEscenaGeneral(Stage primaryStage){
         GridPane pane = new GridPane();
@@ -266,7 +306,7 @@ public class Principal  extends Application {
         switch (misElementos.size()){
             case 0:
                 
-                Scene scene = new Scene(lanzarEscenaFinal(primaryStage), 370, 320);
+                Scene scene = new Scene(lanzarEscenaFinal(primaryStage), 380, 390);
                 return scene;
                 
             case 1:
@@ -345,9 +385,12 @@ public class Principal  extends Application {
         return scene;
     }
     
+    
     // -------------------------------------------------------------------------
     
+    
     public Scene lanzarEscenaReto(Stage primaryStage,Button miBotonSeleccionado,int m){
+        
         Button botonRespaldo=new Button ();
         botonRespaldo = miBotonSeleccionado;
         botonRespaldo.setDisable(true);
@@ -414,7 +457,11 @@ public class Principal  extends Application {
         misElementos.remove(m);
         return scene;
     }
-    //ESCENA FINAL:
+    
+    
+    //ESCENA FINAL  ------------------------------------------------------------
+    
+    
     public GridPane lanzarEscenaFinal(Stage primaryStage){
         
         GridPane pane = new GridPane();
@@ -457,7 +504,31 @@ public class Principal  extends Application {
         valorResultado_2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         GridPane.setConstraints(valorResultado_2, 2, 4);
 
-        pane.getChildren().addAll(titulo,indicadorResultado,valorResultado1,valorResultado_1,valorResultado2,valorResultado_2);
+        Button comenzarDeNuevo = new Button ();
+        comenzarDeNuevo.setText("Iniciar otra Ronda");
+        comenzarDeNuevo.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
+        GridPane.setConstraints(comenzarDeNuevo,1,8);
+        comenzarDeNuevo.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+               primaryStage.setScene(lanzarEscenaPrimera(primaryStage));
+            }
+        });
+        
+        Button finalizar = new Button ();
+        finalizar.setText("Finalizar");
+        finalizar.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
+        GridPane.setConstraints(finalizar,1,9);
+        finalizar.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+               primaryStage.close();
+            }
+        });
+        
+        pane.getChildren().addAll(titulo,finalizar,comenzarDeNuevo,indicadorResultado,valorResultado1,valorResultado_1,valorResultado2,valorResultado_2);
         pane.setStyle("-fx-background-image: url('final.jpg')");
         return pane;
     }
@@ -494,16 +565,7 @@ public class Principal  extends Application {
     btEl10.setStyle("-fx-background-image: url('carbono.jpg')");
     btEl10.setPrefSize(100,150);
     
-    conjuntoElementos.add(elemento1);
-    conjuntoElementos.add(elemento2);
-    conjuntoElementos.add(elemento3);
-    conjuntoElementos.add(elemento4);
-    conjuntoElementos.add(elemento5);
-    conjuntoElementos.add(elemento6);
-    conjuntoElementos.add(elemento7);
-    conjuntoElementos.add(elemento8);
-    conjuntoElementos.add(elemento9);
-    conjuntoElementos.add(elemento10);
+    
     
     launch(args);
     }
